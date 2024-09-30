@@ -8,13 +8,13 @@ export default function Footer() {
       <div className="container flex flex-col items-center px-10 pb-8 mx-auto border-t border-purple-600 dark:border-purple-300 sm:flex-row">
         <Link legacyBehavior href="/">
           <a className="flex items-center justify-center mt-3 text-xl font-medium title-font md:ml-3 md:justify-start">
-          DriveBy
+         LIVE
           </a>
         </Link>
-        <div className="visible h-5 mt-3 ml-4 border-l border-black md:visible sm:flex-row dark:border-gray-300">
-        <span className="text-sm md:ml-5">product of © LIVE Insurance, Inc</span>
-        <span className="text-sm md:ml-1">2024</span>
-        </div>
+       
+        <span className="text-sm md:ml-5 mt-3"> © LIVE Insurance, Inc</span>
+        <span className="text-sm md:ml-1 mt-3">2024</span>
+        
         
 
         

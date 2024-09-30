@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="bg-white dark:bg-black">
       <NextSeo
-        title="DriveBy"
+        title="LIVE"
         description="Building the future of auto insurance."
         canonical="https://www.liveinsurance.app/"
         openGraph={{
@@ -51,8 +51,7 @@ export default function Home() {
               </span>
             </h1>
             <p className="max-w-xl pt-5 mx-auto text-lg text-gray-600 dark:text-gray-400 md:text-lg">
-            We are taking on a challenge – revolutionizing how the auto insurance industry operates.
-            
+
             We&apos;re building an exciting new platform that&apos;s tranformative & brings <span className="font-bold">value</span> to you. 
            
             </p>
@@ -88,7 +87,7 @@ export default function Home() {
         /> */}
       </section>
      { /*<Sponsors /> */}
-      {/* <Features /> */}
+      <Features /> 
      {/* <Pricing /> */}
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 'use client'
-import { Amplify} from 'aws-amplify';
+import { addUser } from '../utils/user-email';
 //import awsExports from '../src/aws-exports'; // The path may vary
 //import config from '../src/amplifyconfiguration.json';
 //import { createSignup } from "../src/graphql/mutations";
@@ -8,20 +8,14 @@ import { Amplify} from 'aws-amplify';
 //import DialogForm from "../dialogform/page";
 import FormEvent from 'react'
 import { useState, ChangeEvent, ChangeEventHandler } from 'react';
-import { generateClient } from "aws-amplify/data";
 
 
-
-
-
-
-const client = generateClient()
 
 export default function SignupForm() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [email,setEmail] = useState()
+  const [email,setEmail] = useState(undefined)
   const [open,setOpen] = useState(false)
   const [success, setSuccess] = useState(false)
 
@@ -42,8 +36,8 @@ export default function SignupForm() {
       //   body: formData,
       // })
 
-      const result = await client.models.SignUpUser.create({
-        email: formData.get("email")
+      const result = await addUser({
+        email: formData.get("email")?.toString()
       })
      
     //  const result = await client.graphql({
@@ -95,7 +89,7 @@ export default function SignupForm() {
         className="w-full rounded-sm border border-gray-300 bg-white px-4 py-3 text-sm text-gray-500 shadow-none"
       />
       {success && (
-        <div className="mt-2 text-xs italic text-[#f43f5e]">Email submitted successfully!</div>
+        <div className="mt-2 text-xs italic text-[#90EE90]">Email submitted successfully!</div>
       )}
       </div>
       <div className="flex-shrink px-3">
