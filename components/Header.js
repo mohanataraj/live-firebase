@@ -17,7 +17,7 @@ export default function Header() {
     <header className="w-full sticky-nav">
       <div className="flex flex-col flex-wrap max-w-5xl p-2.5 mx-auto md:flex-row">
         <div className="flex flex-row items-center justify-between p-2 md:p-1">
-        <span className="items-center justify-between flex-row"><Image src="/images/logo_temp.png" width={40} height={20} /></span>
+        <span className="items-center justify-between flex-row"><Image src="/images/logo_temp.png" alt="live" width={40} height={20} /></span>
           <Link legacyBehavior href="/">
           
             <a className="mb-1 ml-3 text-3xl font-medium text-black transition duration-300 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white md:mb-0">
