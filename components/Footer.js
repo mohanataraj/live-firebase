@@ -1,98 +1,67 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
-export default function Footer() {
-  const router = useRouter();
-  return (
-    <footer className="text-black dark:text-gray-300 body-font">
-      <div className="container flex flex-col items-center px-10 pb-8 mx-auto border-t border-purple-600 dark:border-purple-300 sm:flex-row">
-        <Link legacyBehavior href="/">
-          <a className="flex items-center justify-center mt-3 text-xl font-medium title-font md:ml-3 md:justify-start">
-         LIVE
-          </a>
-        </Link>
-       
-        <span className="text-sm md:ml-5 mt-3"> © LIVE Insurance, Inc</span>
-        <span className="text-sm md:ml-1 mt-3">2024</span>
-        
-        
+"use client";
 
-        
-        <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-3 sm:justify-start">
-          
-          <a
-            aria-label="mail"
-            href="maito:contact@liveinsurance.app"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+import Link from "next/link";
+
+export default function Footer() {
+  const currentYear = 2026; // Keeping it current!
+
+  return (
+    <footer className="bg-white border-t-[6px] border-black pt-16 pb-8 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 pb-12">
+          {/* Logo & Brand */}
+          <div className="space-y-4">
+            <Link
+              href="/"
+              className="text-4xl font-[1000] tracking-tighter text-black"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-          </a>
-          <a
-            aria-label="twitter"
-            className="ml-3"
-            href=""
-          >
-            <svg
-              fill="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-            </svg>
-          </a>
-          <a
-            aria-label="instagram"
-            className="ml-3"
-            href=""
-          >
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-            </svg>
-          </a>
-          <a aria-label="linkedin" className="ml-3" href="#">
-            <svg
-              fill="currentColor"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="0"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="none"
-                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-              ></path>
-              <circle cx="4" cy="4" r="2" stroke="none"></circle>
-            </svg>
-          </a>
-         
-           
-  
-        </span>
+              LIVE<span className="text-[#6366F1]">.</span>
+            </Link>
+            <p className="text-lg font-bold text-slate-600 max-w-xs leading-tight">
+              Smart protection for the way you live now.
+            </p>
+          </div>
+
+          {/* Social Stickers */}
+          <div className="flex flex-wrap gap-4">
+            {[
+              { label: "TW", color: "#60A5FA" },
+              { label: "IG", color: "#EC4899" },
+              { label: "LI", color: "#6366F1" },
+              { label: "✉️", color: "#FFD600" },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href="#"
+                className="w-14 h-14 flex items-center justify-center bg-white border-4 border-black rounded-2xl text-xl font-black shadow-[4px_4px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+                style={{ "--hover-bg": social.color }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = social.color)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "white")
+                }
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t-4 border-black/5 flex flex-col md:flex-row justify-between gap-4">
+          <div className="flex gap-6 text-sm font-black uppercase tracking-widest">
+            <Link href="/privacy" className="hover:text-[#6366F1]">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-[#6366F1]">
+              Terms
+            </Link>
+          </div>
+          <p className="text-sm font-bold text-slate-500">
+            © {currentYear} LIVE Insurance, Inc. Built for the future.
+          </p>
+        </div>
       </div>
     </footer>
   );

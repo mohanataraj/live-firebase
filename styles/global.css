@@ -1,36 +1,47 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-html {
-  min-width: 360px;
-  scroll-behavior: smooth;
+@theme {
+  --radius-4xl: 2.5rem;
+  --font-sans: "Quicksand", "Nunito", "ui-rounded", "system-ui", sans-serif;
+  --color-brand-blue: #3b82f6;
+  --color-brand-yellow: #facc15;
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #f8fafc;
+  --border: #e2e8f0;
 }
 
-.sticky-nav {
-  position: sticky;
-  z-index: 50;
-  top: 0;
-  backdrop-filter: saturate(180%) blur(20px) !important;
-  transition: background-color 0.1 ease-in-out !important;
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --border: #1e293b;
 }
 
-body::-webkit-scrollbar {
-  width: 0.75em;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "ss02", "cv01";
+}
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 90px 90px;
+  }
 }
 
-body::-webkit-scrollbar-thumb {
-  background-color: rgb(39, 39, 39);
-  outline: 1px solid rgb(33, 34, 34);
+.animate-grid {
+  animation: gridMove 40s linear infinite;
 }
 
-::selection {
-  background-color: #f81ce5;
-  color: #fefefe;
+.noise-bg {
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  background-size: cover;
 }

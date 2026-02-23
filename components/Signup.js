@@ -1,110 +1,57 @@
-'use client'
-import { addUser } from '../utils/user-email';
-//import awsExports from '../src/aws-exports'; // The path may vary
-//import config from '../src/amplifyconfiguration.json';
-//import { createSignup } from "../src/graphql/mutations";
-
-//import { CreateSignupMutation } from "@/API";
-//import DialogForm from "../dialogform/page";
-import FormEvent from 'react'
-import { useState, ChangeEvent, ChangeEventHandler } from 'react';
-
-
+"use client";
+import { useState } from "react";
+import { addUser } from "../utils/user-email";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function SignupForm() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [email,setEmail] = useState(undefined)
-  const [open,setOpen] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  const handleClick = () => {
-    setOpen(true)
-  }
-
-  async function handleSubmit(FormEvent) {
-    FormEvent.preventDefault()
-    setIsLoading(true)
-    setError(null) // Clear previous errors when a new request starts
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
 
     try {
-      const formData = new FormData(FormEvent.currentTarget)
-      console.log("Form Data", formData.get("email"))
-      // const response = await fetch('/api/submit', {
-      //   method: 'POST',
-      //   body: formData,
-      // })
-
-      const result = await addUser({
-        email: formData.get("email")?.toString()
-      })
-     
-    //  const result = await client.graphql({
-    //   query:createSignup,
-    //   variables:{
-    //     input:{
-    //        email: formData.get("email")?.toString()
-    //     }
-    //   }
-
-    // })
-
-      // if (!response.ok) {
-      //   throw new Error('Failed to submit the data. Please try again.')
-      // }
- 
-      // Handle response if necessary
-      //const data = await response.json()
-      // ...
+      await addUser({ email });
+      setSuccess(true);
+      setEmail("");
     } catch (error) {
-      // Capture the error message to display to the user
-     // setError(error.message:string)
-      console.error(error)
+      console.error(error);
     } finally {
-      setEmail(" ")
-      setIsLoading(true)
-      setSuccess(true)
+      setIsLoading(false);
     }
   }
+
   return (
-    <form
-    onSubmit={handleSubmit}
-    className=" is-revealing flex flex-col gap-2 sm:flex-row"
-  >
-    <div className="w-full flex flex-row flex-grow md:flex-grow justify-center sm:w-full flex-wrap">
-
-      <label className="hidden" htmlFor="email" aria-hidden="true">
-        Email
-      </label>
-      <input
-        required
-        placeholder="Your best email&hellip;"
-        id="email"
-        name="email"
-        type="email"
-        value={email}
-  
-        autoComplete="off"
-        className="w-full rounded-sm border border-gray-300 bg-white px-4 py-3 text-sm text-gray-500 shadow-none"
-      />
-      {success && (
-        <div className="mt-2 text-xs italic text-[#90EE90]">Email submitted successfully!</div>
-      )}
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="relative group">
+        <input
+          required
+          placeholder="Enter your email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-2xl border-4 border-black bg-slate-50 px-6 py-5 text-lg font-bold placeholder:text-slate-400 focus:bg-white focus:outline-none transition-colors"
+        />
+        {success && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-3 text-sm font-bold text-green-600 flex items-center gap-2"
+          >
+            <span>✅</span> You're on the list!
+          </motion.div>
+        )}
       </div>
-      <div className="flex-shrink px-3">
-      <button
-      className="-mt-px bg-gradient-to-r from-[#ec4899] to-[#f43f5e] focus:accent-[#50d71e] inline-flex cursor-pointer justify-center whitespace-nowrap rounded-sm border-0  px-7 py-4 text-center font-medium leading-4 text-white no-underline"
-      type="submit" onClick={handleClick}
-    >
-      Get Early Access
-    </button>
-   
-    </div>
 
-    
-     
-   
-  </form>
-  )
+      <button
+        disabled={isLoading}
+        type="submit"
+        className="w-full bg-[#FFD600] border-4 border-black rounded-2xl py-5 text-xl font-black uppercase tracking-tight shadow-[6px_6px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all disabled:opacity-50"
+      >
+        {isLoading ? "Joining..." : "Get early access"}
+      </button>
+    </form>
+  );
 }
