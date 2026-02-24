@@ -40,7 +40,7 @@ export default function SignupForm() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-3 text-sm font-bold text-green-600 flex items-center gap-2"
           >
-            <span>✅</span> You're on the list!
+            <span>Congrats.</span> You're on the list!
           </motion.div>
         )}
       </div>
