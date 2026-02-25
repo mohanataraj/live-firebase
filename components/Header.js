@@ -20,11 +20,12 @@ export default function Header({ onJoinClick }) {
 
   return (
     <>
-      {/* Container is now absolute and transparent across all screen sizes. 
-        'pointer-events-none' on the wrapper, 'pointer-events-auto' on the header 
-        ensures you can still click links.
+      {/* Responsive Wrapper: 
+        - px-4 for phones
+        - md:px-8 for tablets
+        - lg:px-12 for desktop 
       */}
-      <div className="absolute top-0 left-0 right-0 z-[100] flex justify-center pt-8 px-6 md:px-12 pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 z-[100] flex justify-center pt-6 md:pt-8 px-4 md:px-8 lg:px-12 pointer-events-none">
         <motion.header
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -33,9 +34,9 @@ export default function Header({ onJoinClick }) {
           {/* --- LOGO --- */}
           <Link
             href="/"
-            className="text-2xl font-[1000] tracking-tighter text-black group flex items-center"
+            className="text-xl md:text-2xl font-[1000] tracking-tighter text-black group flex items-center"
           >
-            <div className="flex gap-1 mr-4">
+            <div className="flex gap-1 mr-3 md:mr-4">
               {"LIVE".split("").map((letter, i) => (
                 <motion.span
                   key={i}
@@ -66,8 +67,11 @@ export default function Header({ onJoinClick }) {
             <span className="leading-none">Insurance</span>
           </Link>
 
-          {/* --- DESKTOP NAV --- */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* --- DESKTOP/TABLET NAV --- 
+              Changed from md:flex to lg:flex to keep the hamburger on vertical tablets, 
+              or keep it at md:flex if you want tablets to show full links.
+          */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link
               href="#"
               className="text-sm font-black uppercase tracking-widest hover:text-[#6366F1] transition-colors"
@@ -100,68 +104,79 @@ export default function Header({ onJoinClick }) {
             </button>
           </nav>
 
-          {/* --- MOBILE TOGGLE --- */}
+          {/* --- MOBILE/TABLET TOGGLE --- 
+              Visible on Small and Medium (Tablets), hidden on Large (Desktop)
+          */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="md:hidden w-12 h-12 border-4 border-black rounded-xl flex flex-col items-center justify-center gap-1.5 bg-[#6366F1] shadow-[4px_4px_0px_0px_#000]"
+            className="lg:hidden w-11 h-11 md:w-12 md:h-12 border-[3px] md:border-4 border-black rounded-xl flex flex-col items-center justify-center gap-1.5 bg-[#6366F1] shadow-[3px_3px_0px_0px_#000] md:shadow-[4px_4px_0px_0px_#000]"
           >
-            <div className="w-6 h-1 bg-white rounded-full" />
-            <div className="w-6 h-1 bg-white rounded-full" />
+            <div className="w-5 md:w-6 h-1 bg-white rounded-full" />
+            <div className="w-5 md:w-6 h-1 bg-white rounded-full" />
           </button>
         </motion.header>
       </div>
 
-      {/* --- MOBILE MENU --- */}
+      {/* --- SLIDE-OUT MENU (Mobile & Tablet) --- */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            variants={menuVariants}
-            initial="closed"
-            animate="opened"
-            exit="closed"
-            className="fixed inset-0 z-[200] bg-[#FFD600] flex flex-col p-8 border-l-[10px] border-black"
-          >
-            <div className="flex justify-end">
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="w-14 h-14 border-4 border-black rounded-2xl bg-white font-black text-2xl shadow-[6px_6px_0px_0px_#000]"
-              >
-                ✕
-              </button>
-            </div>
+          <>
+            {/* Backdrop for closing menu */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/20 z-[150] lg:hidden"
+            />
 
-            <nav className="flex flex-col gap-8 mt-12">
-              <Link
-                href="#"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-5xl font-[1000] tracking-tighter text-black hover:italic"
-              >
-                ABOUT
-              </Link>
+            <motion.div
+              variants={menuVariants}
+              initial="closed"
+              animate="opened"
+              exit="closed"
+              className="fixed top-0 right-0 bottom-0 w-[280px] md:w-[400px] z-[200] bg-[#FFD600] flex flex-col p-8 border-l-[6px] md:border-l-[10px] border-black"
+            >
+              <div className="flex justify-end">
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-12 h-12 md:w-14 md:h-14 border-4 border-black rounded-2xl bg-white font-black text-xl md:text-2xl shadow-[4px_4px_0px_0px_#000] md:shadow-[6px_6px_0px_0px_#000]"
+                >
+                  ✕
+                </button>
+              </div>
 
-              <Link
-                href="#products-section"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-5xl font-[1000] tracking-tighter text-black hover:italic"
-              >
-                PRODUCTS
-              </Link>
+              <nav className="flex flex-col gap-6 md:gap-8 mt-12">
+                {["ABOUT", "PRODUCTS", "CONTACT"].map((item) => (
+                  <Link
+                    key={item}
+                    href={item === "PRODUCTS" ? "#products-section" : "#"}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-4xl md:text-5xl font-[1000] tracking-tighter text-black hover:italic transition-all"
+                  >
+                    {item}
+                  </Link>
+                ))}
 
-              <Link
-                href="#"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-5xl font-[1000] tracking-tighter text-black hover:italic"
-              >
-                CONTACT
-              </Link>
-            </nav>
+                {/* Waitlist button inside mobile menu for easier access */}
+                <button
+                  onClick={() => {
+                    onJoinClick();
+                    setIsMenuOpen(false);
+                  }}
+                  className="mt-4 px-6 py-4 bg-white border-4 border-black rounded-2xl font-black text-xl uppercase shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                >
+                  Join Waitlist
+                </button>
+              </nav>
 
-            <div className="mt-auto">
-              <p className="font-black uppercase tracking-widest text-sm text-black">
-                © 2026 Live Insurance
-              </p>
-            </div>
-          </motion.div>
+              <div className="mt-auto">
+                <p className="font-black uppercase tracking-widest text-xs md:text-sm text-black">
+                  © 2026 Live Insurance
+                </p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

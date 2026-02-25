@@ -8,7 +8,7 @@ export default function Error() {
     <div className="bg-white dark:bg-black">
       <Header />
       <Head>
-        <title>404: Page was not found.</title>
+        <title>404: Coming soon</title>
       </Head>
       <div className="flex flex-col items-center justify-center px-10 bg-white h-[90vh] dark:bg-black md:flex-row md:space-x-6">
         <div className="space-x-2">
@@ -18,15 +18,15 @@ export default function Error() {
         </div>
         <div className="max-w-md">
           <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-            Coming soon
+            Not Found. Not Insured.
           </p>
           <p className="max-w-sm mb-8 text-md">
-            Plutonium doesn&apos;t do well with generic 404 pages. Hence: this
-            page. If you&apos;re here from clicking demo: it was on purpose!
+            This page took a risk. We don’t recommend that. Let’s get you back
+            to something properly covered.
           </p>
           <Link legacyBehavior href="/">
             <a className="px-4 py-2.5 text-black dark:text-white border dark:hover:bg-white dark:hover:text-black rounded-lg shadow transition duration-300 hover:shadow-md">
-              Return Home
+              Let’s get you home.
             </a>
           </Link>
         </div>

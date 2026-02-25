@@ -33,23 +33,23 @@ const Products = () => {
           cy="100"
           r="88"
           fill="none"
-          stroke="#6366F1"
-          strokeWidth="16"
+          stroke="#6B3FFF"
+          strokeWidth="20"
         />
         <circle
           cx="100"
           cy="100"
           r="62"
           fill="none"
-          stroke="#91FF84"
-          strokeWidth="16"
+          stroke="#6fe262"
+          strokeWidth="20"
         />
         <motion.circle
           cx="100"
           cy="100"
           r="38"
           fill="none"
-          stroke="#6366F1"
+          stroke="#6B3FFF"
           strokeWidth="16"
           strokeDasharray="90 29"
           strokeLinecap="round"
@@ -62,13 +62,13 @@ const Products = () => {
           r="16"
           fill="none"
           stroke="#91FF84"
-          strokeWidth="12"
+          strokeWidth="20"
         />
         <motion.circle
           cx="100"
           cy="100"
           r="6"
-          fill="#6366F1"
+          fill="#6B3FFF"
           animate={{ scale: [1, 1.5, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -136,7 +136,7 @@ const Products = () => {
               variants={childElement}
               className="inline-block px-4 py-1.5 rounded-full border-2 border-black bg-white text-black font-bold text-xs uppercase shadow-[4px_4px_0px_0px_#000]"
             >
-              Navigational Personal companion
+              Personal companion
             </motion.div>
             <motion.h3
               variants={childElement}
@@ -149,25 +149,38 @@ const Products = () => {
               variants={childElement}
               className="text-xl font-semibold text-white/90 max-w-sm"
             >
-              Smart connection. Instant protection & intelligent awareness for
-              every turn and every destination—all on demand.
+              Smart connection, instant protection & intelligent awareness for
+              every turn and every destination — on demand.
             </motion.p>
 
             <motion.div
               variants={childElement}
-              className="flex flex-wrap gap-4 pt-4 justify-center"
+              className="mt-8 p-6 flex flex-wrap gap-4 justify-center rounded-3xl border-2 border-white/10 bg-white/5 backdrop-blur-sm"
             >
               <button
                 onClick={() => setIsSoonOpen(true)}
-                className="flex items-center gap-3 bg-black text-white px-7 py-4 rounded-2xl border-2 border-white/10 font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000] hover:bg-[#91FF84] hover:text-black transition-all"
+                className="flex items-center gap-3 bg-black text-white px-7 py-4 rounded-2xl border-2 border-white/10 font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000] hover:bg-[#91FF84] hover:text-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-[4px_4px_0px_0px_#000]"
               >
-                <Apple size={18} /> App Store
+                <Apple size={20} weight="fill" />
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-medium lowercase opacity-70">
+                    Download on the
+                  </span>
+                  <span className="text-sm">App Store</span>
+                </div>
               </button>
+
               <button
                 onClick={() => setIsSoonOpen(true)}
-                className="flex items-center gap-3 bg-black text-white px-7 py-4 rounded-2xl border-2 border-white/10 font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000] hover:bg-[#91FF84] hover:text-black transition-all"
+                className="flex items-center gap-3 bg-black text-white px-7 py-4 rounded-2xl border-2 border-white/10 font-black uppercase text-xs shadow-[6px_6px_0px_0px_#000] hover:bg-[#91FF84] hover:text-black transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-[4px_4px_0px_0px_#000]"
               >
-                <Play size={18} fill="currentColor" /> Play Store
+                <Play size={20} fill="currentColor" />
+                <div className="flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-medium lowercase opacity-70">
+                    Get it on
+                  </span>
+                  <span className="text-sm">Google Play</span>
+                </div>
               </button>
             </motion.div>
           </div>
